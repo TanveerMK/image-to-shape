@@ -2,41 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Futuristic Dark Glassmorphism Design System for 2D to 3D Conversion App
+All colors MUST be HSL. Focus on dark theme with neon accents.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark background system */
+    --background: 220 40% 5%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Glass card system */
+    --card: 220 40% 8%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover system */
+    --popover: 220 30% 10%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary neon purple */
+    --primary: 270 100% 70%;
+    --primary-foreground: 220 40% 5%;
+    --primary-glow: 270 100% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary neon blue */
+    --secondary: 220 100% 60%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted glass surface */
+    --muted: 220 20% 15%;
+    --muted-foreground: 210 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent neon cyan */
+    --accent: 180 100% 50%;
+    --accent-foreground: 220 40% 5%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Destructive neon red */
+    --destructive: 0 100% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Glass borders and inputs */
+    --border: 220 20% 25%;
+    --input: 220 20% 15%;
+    --ring: 270 100% 70%;
 
-    --radius: 0.5rem;
+    /* Border radius for glassmorphism */
+    --radius: 1rem;
+
+    /* Custom gradients for glassmorphism */
+    --gradient-primary: linear-gradient(135deg, hsl(270 100% 70% / 0.2), hsl(220 100% 60% / 0.2));
+    --gradient-surface: linear-gradient(135deg, hsl(220 40% 8% / 0.8), hsl(220 20% 12% / 0.6));
+    --gradient-hero: linear-gradient(135deg, hsl(270 100% 70% / 0.1), hsl(220 100% 60% / 0.1), hsl(180 100% 50% / 0.1));
+    
+    /* Glass shadows */
+    --shadow-glass: 0 8px 32px hsl(270 100% 70% / 0.1);
+    --shadow-glow: 0 0 40px hsl(270 100% 70% / 0.3);
+    
+    /* Animation timings */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +124,57 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+    background: radial-gradient(ellipse at top, hsl(220 40% 8%) 0%, hsl(220 40% 5%) 50%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utilities */
+  .glass {
+    background: var(--gradient-surface);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .glass-hover {
+    transition: var(--transition-smooth);
+  }
+  
+  .glass-hover:hover {
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+  }
+  
+  /* Neon glow effects */
+  .neon-glow {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+  
+  .neon-text {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.8);
+  }
+  
+  /* Upload zone styles */
+  .upload-zone {
+    background: var(--gradient-surface);
+    backdrop-filter: blur(20px);
+    border: 2px dashed hsl(var(--border));
+    transition: var(--transition-smooth);
+  }
+  
+  .upload-zone.active {
+    border-color: hsl(var(--primary));
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Progress animation */
+  .progress-glow {
+    background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.6);
   }
 }
